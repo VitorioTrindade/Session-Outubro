@@ -1,0 +1,36 @@
+import { useEffect, useState } from 'react'
+import { Container } from './styled'
+
+export default function Contador(props) {
+    const [qtd, setQtd] = useState(props.value);
+
+    function acrescentar() {
+        if (qtd >= 10)
+            return;
+        setQtd(qtd + 1);
+    }
+
+    function decrementar() {
+        if (qtd === 0)
+            return;
+        setQtd(qtd - 1);
+    }
+
+    useEffect(() => {
+        props.onChange(qtd);
+    }, [qtd])
+
+    return (
+        <Container>
+            <div className="menos" onClick={decrementar}> 
+                -
+            </div>
+            <div className="quantidade">
+                {qtd}
+            </div>
+            <div className="mais" onClick={acrescentar}> 
+                +
+            </div>
+        </Container>
+    )
+}
